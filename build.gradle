@@ -7,7 +7,7 @@
  */
 
 apply plugin: 'java'
-
+apply plugin: 'org.sonarqube'
 //defaultTasks 'build'
 
 sourceSets {
@@ -22,19 +22,49 @@ sourceSets {
 //  }
 }
 
-
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:3.0"
+  }
+}
 
 
 //plugins {
     // Apply the java-library plugin to add support for Java Library
 //    id 'java-library'
+//	id 'org.sonarqube' version '7.8'
 //}
+
+//sonarqube {
+//    server {
+//        url = "http://localhost:9000/"
+//    }
+//    database{
+//        url = "jdbc:postgresql://localhost/sonar"
+//        //driverClassName = "com.mysql.jdbc.Driver"
+//        username = "sonar"
+//        password = "sonar"
+//    }
+//}
+
 
 //repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
 //    jcenter()
 //}
+
+
+repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
 
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
@@ -47,5 +77,4 @@ dependencies {
     //testImplementation 'junit:junit:4.13'
 	
 	testCompile fileTree(dir: './lib', includes: ['*.jar'])
-
 }
